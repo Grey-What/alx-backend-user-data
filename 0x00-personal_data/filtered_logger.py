@@ -11,6 +11,7 @@ import logging
 # PII Fields
 PII_FIELDS = ("name", "email", "phone", "ssn", "password")
 
+
 class RedactingFormatter(logging.Formatter):
     """ Redacting Formatter class
         """
@@ -44,6 +45,7 @@ def filter_datum(fields: List[str], redaction: str, message: str,
     """
     return re.sub(rf'({"|".join(fields)})=[^"{separator}"]*',
                   rf'\1={redaction}', message)
+
 
 def get_logger() -> logging.Logger:
     """
