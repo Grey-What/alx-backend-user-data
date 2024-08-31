@@ -6,6 +6,8 @@ Module contains function thaty returns log messages obfuscated
 import re
 from typing import List
 import logging
+from os import environ
+import mysql.connector
 
 
 # PII Fields
@@ -60,3 +62,21 @@ def get_logger() -> logging.Logger:
 
     logger.addHandler(handler)
     return logger
+
+
+def get_db() -> mysql.connector.connection.MySQLConnection:
+    """
+    Returns database connection
+    """
+    username = environ.get("PERSONAL_DATA_DB_USERNAME", "root")
+    password = environ.get("PERSONAL_DATA_DB_PASSWORD", "")
+    host = environ.get("PERSONAL_DATA_DB_HOST", "localhost")
+    db_name = environ.get("PERSONAL_DATA_DB_NAME")
+
+    db = mysql.connector.connect.MySQLConnection(
+        user=username,
+        password=password,
+        host=host,
+        database=db_name
+    )
+    return db
