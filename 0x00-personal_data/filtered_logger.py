@@ -73,10 +73,34 @@ def get_db() -> mysql.connector.connection.MySQLConnection:
     host = environ.get("PERSONAL_DATA_DB_HOST", "localhost")
     db_name = environ.get("PERSONAL_DATA_DB_NAME")
 
-    db = mysql.connector.connection.MySQLConnection(
+    db_connection = mysql.connector.connection.MySQLConnection(
         user=username,
         password=password,
         host=host,
         database=db_name
     )
-    return db
+    return db_connection
+
+
+def main() -> None:
+    """
+    Main function
+    """
+    db_connection = get_db()
+    cursor = db_connection.cursor()
+
+    cursor.execute("SELECT * FROM users;")
+    fields = [i[0] for i in cursor.description]
+
+    logger = get_logger()
+
+    for row in cursor:
+        row_string = ''.join(f'{f}={str(r)}; ' for r, f in zip(row, field_names))
+        logger.info(row_string.strip())
+
+    cursor.close()
+    db_connection.close()
+
+
+if __name__ == "__main__":
+    main()
