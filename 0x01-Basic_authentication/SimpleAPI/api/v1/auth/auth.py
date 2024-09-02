@@ -19,7 +19,7 @@ class Auth():
         Return: bool
         """
         if (path is None or excluded_paths is None
-             or len(excluded_paths) == 0):
+           or len(excluded_paths) == 0):
             return True
 
         basic_path = path.rstrip('/')
