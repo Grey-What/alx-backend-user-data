@@ -33,3 +33,12 @@ def unauthorized_check() -> str:
     """
     abort(401)
     return "unauthorized"
+
+
+@app_views.route('/forbidden', methods=['GET'], strict_slashes=False)
+def forbidden_check() -> str:
+    """
+    testing error handler for 403 code
+    """
+    abort(403)
+    return "forbidden"
