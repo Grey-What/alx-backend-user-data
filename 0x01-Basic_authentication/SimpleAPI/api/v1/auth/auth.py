@@ -14,9 +14,22 @@ class Auth():
 
     def require_auth(self, path: str, excluded_paths: List[str]) -> bool:
         """
-        returns False
+        Determine if route do not need authenitcation
+
+        Return: bool
         """
-        return False
+        if (path is None or excluded_paths is None
+             or len(excluded_paths) == 0):
+            return True
+
+        basic_path = path.rstrip('/')
+
+        for excluded in excluded_paths:
+            basic_excluded = excluded.rstrip('/')
+
+            if basic_path == basic_excluded:
+                return False
+        return True
 
     def authorization_header(self, request=None) -> str:
         """
