@@ -5,6 +5,7 @@ Module contains class for session authentication mechanism
 
 from api.v1.auth.auth import Auth
 from uuid import uuid4
+from models.user import User
 
 
 class SessionAuth(Auth):
@@ -31,3 +32,14 @@ class SessionAuth(Auth):
             return None
 
         return self.user_id_by_session_id.get(session_id)
+
+    def current_user(self, request=None):
+        """returns user based on cookie value"""
+        if request is None:
+            return
+
+        cookie = self.session_cookie(request)
+        user_id = self.user_id_for_session_id(cookie)
+        user = User.get(user_id)
+
+        return user
