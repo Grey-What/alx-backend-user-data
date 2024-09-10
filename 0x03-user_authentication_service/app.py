@@ -10,7 +10,7 @@ app = Flask(__name__)
 
 
 @app.route("/", strict_slashes=False)
-def json_payload():
+def json_payload() -> str:
     """
     returns a json payload
     """
@@ -18,7 +18,7 @@ def json_payload():
 
 
 @app.route("/users", methods=['POST'])
-def users():
+def users() -> str:
     """
     endpoint for user registration
     """
