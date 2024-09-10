@@ -35,10 +35,9 @@ class Auth:
         register a new user nad saving to database
         """
         try:
-            user_found = self._db.find_user_by(email=email)
-            if user_found:
-                raise ValueError(f'User {email} already exists')
+            self._db.find_user_by(email=email)
         except NoResultFound:
             hashed_pw = _hash_password(password)
             user = self._db.add_user(email, hashed_pw)
             return user
+        raise ValueError(f'User {email} already exists')
