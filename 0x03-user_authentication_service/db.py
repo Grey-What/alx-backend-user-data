@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 """DB module
 """
 from sqlalchemy import create_engine
@@ -34,7 +33,7 @@ class DB:
 
     def add_user(self, email: str, hashed_password: str) -> User:
         """
-        Save a user to the database and return the instance
+        Save a user to the databse and return the instance
         """
         try:
             new_user = User(email=email, hashed_password=hashed_password)
