@@ -65,7 +65,7 @@ class Auth:
             return False
         return False
 
-    def create_session(self, email: str) -> str:
+    def create_session(self, email: str) -> Union[str, None]:
         """
         find user by email and generate session id
         """
@@ -80,7 +80,7 @@ class Auth:
             return session_id
         return None
 
-    def get_user_from_session_id(self, session_id: str) -> User:
+    def get_user_from_session_id(self, session_id: str) -> Union[User, None]:
         """
         find a user by session id
         """
@@ -118,7 +118,7 @@ class Auth:
         self._db.update_user(user.id, reset_token=token)
         return user.reset_token
 
-    def update_password(reset_token: str, password: str) -> None:
+    def update_password(self, reset_token: str, password: str) -> None:
         """
         updates user password to new password
         """
