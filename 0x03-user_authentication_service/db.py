@@ -35,13 +35,10 @@ class DB:
         """
         Save a user to the databse and return the instance
         """
-        try:
-            new_user = User(email=email, hashed_password=hashed_password)
-            self._session.add(new_user)
-            self._session.commit()
-        except Exception:
-            self._session.rolback()
-            new_user = None
+        new_user = User(email=email, hashed_password=hashed_password)
+
+        self._session.add(new_user)
+        self._session.commit()
 
         return new_user
 
