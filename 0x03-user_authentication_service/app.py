@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """contains flask app"""
 
-from flask import Flask, jsonify, request, abort, redirect, url_for
 from auth import Auth
+from flask import Flask, jsonify, request, abort, redirect, url_for
 
 
 AUTH = Auth()
