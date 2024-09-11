@@ -60,6 +60,8 @@ class DB:
         update User attribute and commit changes to database
         """
         user = self.find_user_by(id=user_id)
+        if not user:
+            raise NoResultFound
 
         for k, v in kwargs.items():
             if not hasattr(user, k):
