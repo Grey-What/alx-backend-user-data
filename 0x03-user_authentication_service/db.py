@@ -36,6 +36,7 @@ class DB:
         """
         Save a user to the databse and return the instance
         """
+
         new_user = User(email=email, hashed_password=hashed_password)
 
         self._session.add(new_user)
@@ -47,6 +48,7 @@ class DB:
         """
         queries database for user filtered by keyword arguments provided
         """
+
         if not kwargs:
             raise InvalidRequestError
 
@@ -59,6 +61,7 @@ class DB:
         """
         update User attribute and commit changes to database
         """
+
         user = self.find_user_by(id=user_id)
         if not user:
             raise NoResultFound
